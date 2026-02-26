@@ -1,9 +1,12 @@
-from document_loader import load_document
+from document_loader import load_document, split_documents
 
 pages = load_document("../data/Uolo V2 Guidelines_Spanish.pdf")
 
-# Print the first Document
+chunks = split_documents(pages)
 
-print(pages[0].page_content[:300]) # Print the first 300 characters of the first page's content
-print("---")
-print(pages[0].metadata) # Print the metadata of the first page
+print(f"\nTotal pages loaded: {len(pages)}")
+print(f"Total chunks created: {len(chunks)}")
+print("\n--- Chunk Examples ---")
+print(chunks[0].page_content[:300]) 
+print("\n--- Metadata of first chunk ---")
+print(chunks[0].metadata)

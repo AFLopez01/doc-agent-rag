@@ -1,6 +1,7 @@
 import logging
 from pathlib import Path
 from langchain_community.document_loaders import PyPDFLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 # Logger configuration
 
@@ -42,4 +43,29 @@ def load_document(file_path: str):
     logger.info(f"✅ Successfully loaded document: {path.name} with {len(pages)} pages.")
 
     return pages
+
+def split_documents(pages: list) -> list:
+    """
+    Split the content of each page into smaller chunks using RecursiveCharacterTextSplitter.
+
+    Args:
+        pages (list): List of Document objects, each containing page_content and metadata.
+
+    Returns:
+        List of Document objects with split content.
+    """
+    logger.info(f"Splitting documents into smaller chunks...")
+
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=1000,
+        chunk_overlap=200,
+        length_function=len
+    )
+
+    chunks = splitter.split_documents(pages)
+
+    logger.info(f"✅ Successfully split documents into {len(chunks)} chunks.")
+
+    return chunks
+
 
