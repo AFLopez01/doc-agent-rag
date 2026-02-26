@@ -69,3 +69,17 @@ def split_documents(pages: list) -> list:
     return chunks
 
 
+def log_chunks_metadata(chunks: list) -> None: 
+    """
+    Log the metadata of each chunk for debugging purposes.
+
+    Args:
+        chunks (list): List of Document objects with split content.
+    """
+    logger.info("--- Logging metadata of each chunk ---")
+    for i, chunk in enumerate(chunks):
+        source = chunk.metadata.get("source", "Unknown Source")
+        page = chunk.metadata.get("page", "?")
+        size = len(chunk.page_content)
+        
+        logger.info(f"Chunk {i+1} | Source: {source}, Page: {page} |Size: {size} chars ")

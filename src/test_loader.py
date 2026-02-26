@@ -1,8 +1,8 @@
-from document_loader import load_document, split_documents
+from document_loader import load_document, split_documents, log_chunks_metadata
 
 pages = load_document("../data/Uolo V2 Guidelines_Spanish.pdf")
-
 chunks = split_documents(pages)
+log_chunks_metadata(chunks)
 
 print(f"\nTotal pages loaded: {len(pages)}")
 print(f"Total chunks created: {len(chunks)}")
